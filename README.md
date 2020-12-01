@@ -10,3 +10,69 @@ This short study answers the following points:
 - Contruction of a linear programming model.
 - Production of appropriate R program to solve the linear programming model.
 - Solving the game for David using produced linear programming model.
+
+### Solution
+
+#### The reason behind considering this game as zero-sum game because:
+- Zero-sum means among the two players whoever wins the game, the opposite player will lose the same amount
+- Both the players can have different strategies whereas they play for once
+
+
+#### Payoff Matrix:
+
+Notation (i, j) has been used to record number of chips into pile for each player where i belongs to pile P1 and j belongs to pile P2 for each player that means (1, 4) denotes that 1 chip in P1 and 4 chips in P2.
+
+![Graph-1](/Images/img1.png)
+
+
+#### Saddle Point:
+
+The saddle point is a pair of strategies where none of the player can perform better hence we have achieved saddle point (optimal solution) where a 2-person zero-sum game is in equilibrium stage.
+
+A game has achieved equilibrium can be said if and only if:
+- David has no different opportunities available to choose from while Helen uses the strategy (same way for reverse scenario).
+- None of the player finds optional strategy to choose, then game has achieved optimal solution.
+
+This optimal solution is called saddle point. In this case U (lower value of the game) = L (upper value of the game) is true.
+In this game, U ≠ L hence we must follow mixed strategies as optimal payoff cannot be achieved by a pure strategy. In the game, overall solution for David is loss contrast to Helen hence David will look forward to minimizing the loss while on the other end Helen will try to maximize the loss of David.
+
+#### Linear Model for the game:
+1. Linear Model for David:
+    -   Min z = v (u.r.s. means unrestricted)
+    - v – (– x1 – x6) >= 0
+    - v – (– x1 – x2 – x5 – x6) >= 0
+    - v – (– x2 – x3 – x4 – x5) >= 0
+    - v – (– 2x3 – 2x4) >= 0
+    - v – (– x2 – x3 – x4 – x5) >= 0
+    - v – (– x1 – x2 – x5 – x6) >= 0
+    - v – (– x1 – x6) >= 0
+    - x1 + x2 + x3 + x4 + x5 + x6 = 1
+    - xi >= 0 if i = 1 to 6
+
+2. Linear Model for Helen:
+    - Max z = v (u.r.s. means unrestricted)
+    - v – (– y1 – y2 – y6 – y7) <= 0
+    - v – (– y2 – y3 – y5 – y6) <= 0
+    - v – (– y3 – 2y4 – y5) <= 0
+    - v – (– y3 – 2y4 – y5) <= 0
+    - v – (– y2 – y3 – y5 – y6) <= 0
+    - v – (– y1 – y2 – y6 – y7) <= 0
+    - y1 + y2 + y3 + y4 + y5 + y6 + y7 = 1
+    - yi >= 0 if i = 1 to 7
+
+#### Devlopment of Linear Model in R -> [R Code](/Program.R)
+
+#### Solving David's Game using Linear Model:
+
+Using David’s linear game model, the following mixed strategies were achieved: X1 = 0.67, X2 = 0.00, X3 = 0.33, X4 = 0.00, X5 = 0.00, X6 = 0.00
+
+Using these obtained values with the constraints specified in point D.1:
+- Reward = 0.67 if Helen’s strategy = y1
+- Reward = 0.67 if Helen’s strategy = y2
+- Reward = 0.33 if Helen’s strategy = y3
+- Reward = 0.66 if Helen’s strategy = y4
+- Reward = 0.33 if Helen’s strategy = y5
+- Reward = 0.67 if Helen’s strategy = y6
+- Reward = 0.67 if Helen’s strategy = y7
+
+David is on losing side hence David should choose mixed strategies (X1 = 0.67, X2 = 0.00, X3 = 0.33, X4 = 0.00, X5 = 0.00, X6 = 0.00) to make Helen’s reward as small as possible as she will try to obtain expected reward of 0.67 in each turn.
